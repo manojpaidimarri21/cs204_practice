@@ -50,14 +50,7 @@ void push_to_queue(vector<int>* v,int* colour,queue<int> bfs,int a)
             bfs.push(v[a][i]);
         }
     }
-     queue <int> g = bfs; 
-     cout<<"queue";
-    while (!g.empty()) 
-    { 
-        cout<<g.front()<<" ";
-        g.pop();
-    } 
-    cout<<""<<endl;
+ 
 
     
 }
@@ -70,31 +63,19 @@ bool is_bipartiate(vector<int>* v,int n)
         {
             colour[j]=-1;
         }
-        cout<<"colour";
-        forl(j,1,n+1)
-        {
-            cout<<colour[j];
-        }
-        cout<<""<<endl;
     bfs.push(1);
     colour[1]=0;
-        cout<<"colour";
-        forl(j,1,n+1)
+ 
+        int s=v[1].size();
+    forl(i,0,s)
+    {   
+        if((colour[v[1][i]]==-1)&&(is_in_queue(bfs,v[1][i])==false))
         {
-            cout<<colour[j];
+            bfs.push(v[1][i]);
         }
-        cout<<""<<endl;
-    int s=v[1].size();
-    
-    push_to_queue(v,colour,bfs,1);
-        queue <int> g = bfs; 
-     cout<<"queue";
-    while (!g.empty()) 
-    { 
-        cout<<g.front()<<" ";
-        g.pop();
-    } 
-    cout<<""<<endl;
+    }
+ 
+
 
 
 
@@ -103,18 +84,21 @@ bool is_bipartiate(vector<int>* v,int n)
         colour[v[1][i]]=1;
     }
     
-            cout<<"colour";
-        forl(j,1,n+1)
-        {
-            cout<<colour[j];
-        }
-        cout<<""<<endl;
-    cout<<"iam"<<endl;
     while(!bfs.empty())
     {   
         k=bfs.front();
+        int a=k;
         bfs.pop();
      int s=v[k].size();
+     
+    forl(i,0,s)
+    {   
+        if((colour[v[a][i]]==-1)&&(is_in_queue(bfs,v[a][i])==false))
+        {
+            bfs.push(v[a][i]);
+        }
+    }
+ 
     forl(i,0,s)
     {
         if(colour[v[k][i]]==-1)
@@ -130,12 +114,6 @@ bool is_bipartiate(vector<int>* v,int n)
        }
        
     }
-        forl(j,1,n+1)
-        {
-            cout<<colour[j];
-        }
-        cout<<""<<endl;
-        
         
     }
     return true;
